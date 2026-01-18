@@ -3,7 +3,8 @@ package com.justy41.handdrawn.core;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Scene {
-    Ecs ecs;
+    public Ecs ecs;
+    SceneManager sceneManager;
 
     public Scene() {
         ecs = new Ecs();

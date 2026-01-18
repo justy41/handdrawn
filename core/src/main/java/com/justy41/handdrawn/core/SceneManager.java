@@ -15,6 +15,9 @@ public class SceneManager {
     }
 
     public <T extends Scene> void addScene(T scene) {
+        scene.sceneManager = this;
+        scene.ecs.sceneManager = this;
+
         scenes.add(scene);
         if(scenes.size() == 1) {
             currentSceneId = 0;

@@ -1,9 +1,7 @@
 package com.justy41.handdrawn.core;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.justy41.handdrawn.components.Component;
-import com.justy41.handdrawn.components.RigidBody;
-import com.justy41.handdrawn.components.TransformComponent;
+import com.justy41.handdrawn.components.*;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,10 +9,14 @@ import java.util.Set;
 
 public class Ecs {
     int nextEntity;
+    public SceneManager sceneManager;
     private Set<Integer> freeIDs;
     private Set<Integer> entitiesToDestroy;
     public HashMap<Integer, TransformComponent> transforms;
     public HashMap<Integer, RigidBody> rigidbodies;
+    public HashMap<Integer, SpriteRenderer> spriteRenderers;
+    public HashMap<Integer, BoxCollider> boxColliders;
+    public HashMap<Integer, Player> players;
 
     public Ecs() {
         nextEntity = -1;
@@ -22,6 +24,9 @@ public class Ecs {
         entitiesToDestroy = new HashSet<>();
         transforms = new HashMap<>();
         rigidbodies = new HashMap<>();
+        spriteRenderers = new HashMap<>();
+        boxColliders = new HashMap<>();
+        players = new HashMap<>();
         // ...
     }
 
@@ -38,6 +43,9 @@ public class Ecs {
 
         transforms.put(id, null);
         rigidbodies.put(id, null);
+        spriteRenderers.put(id, null);
+        boxColliders.put(id, null);
+        players.put(id, null);
         // ...
         return id;
     }
@@ -60,6 +68,9 @@ public class Ecs {
         for(int entity : entitiesToDestroy) {
             transforms.remove(entity);
             rigidbodies.remove(entity);
+            spriteRenderers.remove(entity);
+            boxColliders.remove(entity);
+            players.remove(entity);
             // ...
             freeIDs.add(entity);
         }
