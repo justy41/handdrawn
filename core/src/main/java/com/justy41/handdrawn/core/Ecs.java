@@ -66,4 +66,8 @@ public class Ecs {
 
         entitiesToDestroy.clear();
     }
+
+    public void clear() {
+
+    }
 }

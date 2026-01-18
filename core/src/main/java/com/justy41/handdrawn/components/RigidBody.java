@@ -6,7 +6,7 @@ public class RigidBody extends Component {
     Vector2 velocity;
     float gravity;
 
-    RigidBody() {
+    public RigidBody() {
         velocity = new Vector2(0, 0);
         gravity = 1;
     }
