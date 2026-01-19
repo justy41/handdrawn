@@ -1,2 +1,5 @@
 brick.png
 libgdx.png
+tilemaps/template_map.tmx
+tilesets/template_tileset.tsx
+tilesets/template_tilesets.png

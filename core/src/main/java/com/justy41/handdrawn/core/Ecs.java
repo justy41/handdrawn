@@ -1,5 +1,6 @@
 package com.justy41.handdrawn.core;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.justy41.handdrawn.components.*;
 
@@ -10,6 +11,7 @@ import java.util.Set;
 public class Ecs {
     int nextEntity;
     public SceneManager sceneManager;
+    public OrthographicCamera camera;
     private Set<Integer> freeIDs;
     private Set<Integer> entitiesToDestroy;
     public HashMap<Integer, TransformComponent> transforms;
@@ -17,6 +19,7 @@ public class Ecs {
     public HashMap<Integer, SpriteRenderer> spriteRenderers;
     public HashMap<Integer, BoxCollider> boxColliders;
     public HashMap<Integer, Player> players;
+    public HashMap<Integer, TiledComponent> tiledComponents;
 
     public Ecs() {
         nextEntity = -1;
@@ -27,6 +30,7 @@ public class Ecs {
         spriteRenderers = new HashMap<>();
         boxColliders = new HashMap<>();
         players = new HashMap<>();
+        tiledComponents = new HashMap<>();
         // ...
     }
 
@@ -46,6 +50,7 @@ public class Ecs {
         spriteRenderers.put(id, null);
         boxColliders.put(id, null);
         players.put(id, null);
+        tiledComponents.put(id, null);
         // ...
         return id;
     }
@@ -71,6 +76,7 @@ public class Ecs {
             spriteRenderers.remove(entity);
             boxColliders.remove(entity);
             players.remove(entity);
+            tiledComponents.remove(entity);
             // ...
             freeIDs.add(entity);
         }

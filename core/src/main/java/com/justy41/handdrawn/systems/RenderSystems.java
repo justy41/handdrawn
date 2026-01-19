@@ -1,6 +1,7 @@
 package com.justy41.handdrawn.systems;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.justy41.handdrawn.components.SpriteRenderer;
 import com.justy41.handdrawn.components.TransformComponent;
 import com.justy41.handdrawn.core.Ecs;
@@ -28,6 +29,15 @@ public class RenderSystems {
                     sr.flipX,
                     sr.flipY
                 );
+            }
+        });
+    }
+
+    public static void renderTiledMap(Ecs ecs, OrthogonalTiledMapRenderer tiledMapRenderer) {
+        ecs.tiledComponents.forEach((entity, tiledComponent) -> {
+            if(tiledComponent != null) {
+                tiledMapRenderer.setMap(tiledComponent.map);
+                tiledMapRenderer.render();
             }
         });
     }

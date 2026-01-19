@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 public class BoxCollider extends Component{
     public Rectangle rect;
+    public Vector2 relativePosition;
     public HashMap<String, Boolean> touching;
     public boolean isTrigger;
 
@@ -20,8 +21,9 @@ public class BoxCollider extends Component{
         isTrigger = false;
     }
 
-    public BoxCollider(float x, float y, float width, float height) {
-        rect = new Rectangle(x, y, width, height);
+    public BoxCollider(float relX, float relY, float width, float height) {
+        rect = new Rectangle(relX, relY, width, height);
+        relativePosition = new Vector2(relX, relY);
         touching = new HashMap<>();
         touching.put("right", false);
         touching.put("left", false);
@@ -30,8 +32,9 @@ public class BoxCollider extends Component{
         isTrigger = false;
     }
 
-    public BoxCollider(float x, float y, float width, float height, boolean isTrigger) {
-        rect = new Rectangle(x, y, width, height);
+    public BoxCollider(float relX, float relY, float width, float height, boolean isTrigger) {
+        rect = new Rectangle(relX, relY, width, height);
+        relativePosition = new Vector2(relX, relY);
         touching = new HashMap<>();
         touching.put("right", false);
         touching.put("left", false);

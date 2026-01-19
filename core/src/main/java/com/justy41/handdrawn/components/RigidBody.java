@@ -8,7 +8,7 @@ public class RigidBody extends Component {
 
     public RigidBody() {
         velocity = new Vector2(0, 0);
-        gravity = 1;
+        gravity = 0;
     }
 
     public RigidBody(float velX, float velY, float gravity) {
