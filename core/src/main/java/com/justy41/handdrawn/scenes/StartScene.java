@@ -15,9 +15,11 @@ public class StartScene extends Scene {
     public void start() {
         super.start();
 
+        // First you need a Tiled map entity (an entity with the TiledComponent)
         templateMap = ecs.createEntity();
         ecs.addComponent(templateMap, ecs.tiledComponents, new TiledComponent("tilemaps/template_map.tmx"));
 
+        // Only after that you can load the objects
         LoadSystems.loadTiledObjects(ecs);
     }
 

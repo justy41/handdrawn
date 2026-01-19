@@ -80,10 +80,6 @@ public class UpdateSystems {
                         collider.rect = new Rectangle(swept_rect);
                     }
                 });
-
-                if(collider.touching.get("down") || collider.touching.get("up")) {
-                    rb.velocity.y = 0;
-                }
             }
         });
     }

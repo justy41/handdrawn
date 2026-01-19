@@ -2,6 +2,11 @@ package com.justy41.handdrawn.components;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Component that holds data for simple physics interactions.
+ * IMPORTANT: when on ground (collider.touching.get("down")) its good practice to set the gravity to 1
+ * and NOT 0, as 0 makes the ground check jumble up.
+ */
 public class RigidBody extends Component {
     public Vector2 velocity;
     public float gravity;
