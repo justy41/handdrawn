@@ -58,7 +58,7 @@ public class UpdateSystems {
                 });
 
                 // RESOLUTION ON Y AXIS
-                rb.velocity.y -= rb.gravity;
+                rb.velocity.y -= rb.gravity * deltaTime;
                 swept_pos.y += rb.velocity.y * deltaTime;
                 swept_rect.y = swept_pos.y+collider.relativePosition.y;
                 ecs.boxColliders.forEach((e, c) -> {

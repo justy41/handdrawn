@@ -1,6 +1,7 @@
 package com.justy41.handdrawn.core;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.justy41.handdrawn.components.*;
 

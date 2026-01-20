@@ -14,7 +14,7 @@ public class PlayerSystems {
                 BoxCollider col = ecs.boxColliders.get(entity);
 
                 if(col.touching.get("down")) {
-                    rb.gravity = 1;
+                    rb.gravity = 1; // It's important this is 1 and not 0. Makes the "down" check persist.
                     if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                         rb.velocity.y = player.jumpForce;
                     }
