@@ -40,8 +40,8 @@ public class LoadSystems {
                     int player = ecs.createEntity();
                     ecs.addComponent(player, ecs.transforms, new TransformComponent(rect.x, rect.y, 1, 1, 0));
                     ecs.addComponent(player, ecs.rigidbodies, new RigidBody(0, 0, 1200));
-                    ecs.addComponent(player, ecs.spriteRenderers, new SpriteRenderer("brick.png"));
-                    ecs.addComponent(player, ecs.boxColliders, new BoxCollider(0, 0, rect.width, rect.height));
+                    ecs.addComponent(player, ecs.spriteRenderers, new SpriteRenderer("sun_man.png"));
+                    ecs.addComponent(player, ecs.boxColliders, new BoxCollider(56, 35, rect.width, rect.height));
                     ecs.addComponent(player, ecs.players, new Player(150, 400));
                     ecs.players.get(player).gravity = ecs.rigidbodies.get(player).gravity;
                     break;
