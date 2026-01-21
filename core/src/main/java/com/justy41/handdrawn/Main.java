@@ -23,7 +23,7 @@ public class Main extends ApplicationAdapter {
         startScene = new StartScene();
 
         sceneManager.addScene(startScene);
-        sceneManager.getCurrentScene().start();
+        sceneManager.getCurrentScene().start(batch);
     }
 
     @Override
@@ -33,9 +33,7 @@ public class Main extends ApplicationAdapter {
 
         // RENDER
         ScreenUtils.clear(0.21f, 0.15f, 0.2f, 1f);
-        batch.begin();
-            sceneManager.getCurrentScene().render(batch);
-        batch.end();
+        sceneManager.getCurrentScene().render(batch);
 
         sceneManager.loopEnd();
     }

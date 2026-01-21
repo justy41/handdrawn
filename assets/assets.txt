@@ -1,5 +1,6 @@
 brick.png
 libgdx.png
+red_pixel.png
 sun_man.png
 tilemaps/template_map.tmx
 tilemaps/test_map.tmx

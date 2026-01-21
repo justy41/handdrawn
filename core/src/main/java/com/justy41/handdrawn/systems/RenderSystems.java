@@ -2,6 +2,7 @@ package com.justy41.handdrawn.systems;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.justy41.handdrawn.components.BoxCollider;
 import com.justy41.handdrawn.components.SpriteRenderer;
 import com.justy41.handdrawn.components.TransformComponent;
 import com.justy41.handdrawn.core.Ecs;
@@ -38,6 +39,45 @@ public class RenderSystems {
             if(tiledComponent != null) {
                 tiledMapRenderer.setMap(tiledComponent.map);
                 tiledMapRenderer.render();
+            }
+        });
+    }
+
+    public static void renderTiledMapLayers(Ecs ecs, OrthogonalTiledMapRenderer tiledMapRenderer, int[] layers) {
+        ecs.tiledComponents.forEach((entity, tiledComponent) -> {
+            if(tiledComponent != null) {
+                tiledMapRenderer.setMap(tiledComponent.map);
+                for(int i : layers) {
+                    float parallaxX = tiledComponent.map.getLayers().get(i).getParallaxX();
+                    float parallaxY = tiledComponent.map.getLayers().get(i).getParallaxY();
+
+                    // Calculate the parallax offset camera position
+                    float offsetX = ecs.camera.position.x * parallaxX;
+                    float offsetY = ecs.camera.position.y * parallaxY;
+
+                    tiledMapRenderer.setView(
+                        ecs.camera.combined,
+                        offsetX/2,
+                        offsetY/2,
+                        ecs.camera.viewportWidth,
+                        ecs.camera.viewportHeight
+                    );
+                    tiledMapRenderer.render(new int[]{i});
+                }
+            }
+        });
+    }
+
+    public static void debugRender(Ecs ecs, SpriteBatch batch) {
+        ecs.boxColliders.forEach((entity, collider) -> {
+            if(collider != null) {
+                batch.draw(
+                    collider.debugTexture,
+                    collider.rect.x,
+                    collider.rect.y,
+                    collider.rect.width,
+                    collider.rect.height
+                );
             }
         });
     }

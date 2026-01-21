@@ -3,17 +3,14 @@ package com.justy41.handdrawn.scenes;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.justy41.handdrawn.components.*;
 import com.justy41.handdrawn.core.Scene;
-import com.justy41.handdrawn.systems.LoadSystems;
-import com.justy41.handdrawn.systems.PlayerSystems;
-import com.justy41.handdrawn.systems.RenderSystems;
-import com.justy41.handdrawn.systems.UpdateSystems;
+import com.justy41.handdrawn.systems.*;
 
 public class StartScene extends Scene {
     int templateMap;
 
     @Override
-    public void start() {
-        super.start();
+    public void start(SpriteBatch batch) {
+        super.start(batch);
 
         // First you need a Tiled map entity (an entity with the TiledComponent)
         templateMap = ecs.createEntity();
@@ -29,13 +26,20 @@ public class StartScene extends Scene {
 
         PlayerSystems.update(ecs, deltaTime);
         UpdateSystems.updatePosition(ecs, deltaTime);
+        CameraSystems.cameraFollow(ecs, templateMap, deltaTime);
     }
 
     @Override
     public void render(SpriteBatch batch) {
         super.render(batch);
 
-        RenderSystems.renderTiledMap(ecs, tiledMapRenderer);
+        RenderSystems.renderTiledMapLayers(ecs, tiledMapRenderer, new int[]{0,1,2,3,4});
+        batch.begin();
         RenderSystems.drawTextures(ecs, batch);
+        batch.end();
+        RenderSystems.renderTiledMapLayers(ecs, tiledMapRenderer, new int[]{6,7,8});
+        batch.begin();
+        RenderSystems.debugRender(ecs, batch);
+        batch.end();
     }
 }

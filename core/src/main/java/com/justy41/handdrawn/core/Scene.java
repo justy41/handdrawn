@@ -15,12 +15,11 @@ public class Scene {
         ecs = new Ecs();
         ecs.camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         ecs.camera.setToOrtho(false);
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(null, 1);
-        tiledMapRenderer.setView(ecs.camera);
     }
 
-    public void start() {
-
+    public void start(SpriteBatch batch) {
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(null, batch);
+        tiledMapRenderer.setView(ecs.camera);
     }
 
     public void update(float deltaTime) {
