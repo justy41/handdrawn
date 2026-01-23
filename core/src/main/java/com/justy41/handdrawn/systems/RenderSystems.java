@@ -47,23 +47,7 @@ public class RenderSystems {
         ecs.tiledComponents.forEach((entity, tiledComponent) -> {
             if(tiledComponent != null) {
                 tiledMapRenderer.setMap(tiledComponent.map);
-                for(int i : layers) {
-                    float parallaxX = tiledComponent.map.getLayers().get(i).getParallaxX();
-                    float parallaxY = tiledComponent.map.getLayers().get(i).getParallaxY();
-
-                    // Calculate the parallax offset camera position
-                    float offsetX = ecs.camera.position.x * parallaxX;
-                    float offsetY = ecs.camera.position.y * parallaxY;
-
-                    tiledMapRenderer.setView(
-                        ecs.camera.combined,
-                        offsetX/2,
-                        offsetY/2,
-                        ecs.camera.viewportWidth,
-                        ecs.camera.viewportHeight
-                    );
-                    tiledMapRenderer.render(new int[]{i});
-                }
+                tiledMapRenderer.render(layers);
             }
         });
     }
