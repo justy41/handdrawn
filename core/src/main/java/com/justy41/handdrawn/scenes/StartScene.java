@@ -33,6 +33,7 @@ public class StartScene extends Scene {
     public void render(SpriteBatch batch) {
         super.render(batch);
 
+        tiledMapRenderer.setView(ecs.camera);
         RenderSystems.renderTiledMapLayers(ecs, tiledMapRenderer, new int[]{0,1,2,3,4});
         batch.begin();
         RenderSystems.drawTextures(ecs, batch);

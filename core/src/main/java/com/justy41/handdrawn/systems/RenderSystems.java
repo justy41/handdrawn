@@ -2,6 +2,7 @@ package com.justy41.handdrawn.systems;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Matrix4;
 import com.justy41.handdrawn.components.BoxCollider;
 import com.justy41.handdrawn.components.SpriteRenderer;
 import com.justy41.handdrawn.components.TransformComponent;
@@ -44,10 +45,21 @@ public class RenderSystems {
     }
 
     public static void renderTiledMapLayers(Ecs ecs, OrthogonalTiledMapRenderer tiledMapRenderer, int[] layers) {
+        Matrix4 original = tiledMapRenderer.getBatch().getTransformMatrix().cpy();
         ecs.tiledComponents.forEach((entity, tiledComponent) -> {
             if(tiledComponent != null) {
-                tiledMapRenderer.setMap(tiledComponent.map);
-                tiledMapRenderer.render(layers);
+                if(tiledComponent.map.getProperties().get("parallaxx") != null) {
+                    tiledMapRenderer.setMap(tiledComponent.map);
+                    tiledMapRenderer.getBatch().getTransformMatrix().translate((float)tiledComponent.map.getProperties().get("parallaxx"), 0, 0);
+                    tiledMapRenderer.render(layers);
+                    tiledMapRenderer.getBatch().setTransformMatrix(original);
+                }
+                else {
+                    tiledMapRenderer.setMap(tiledComponent.map);
+                    tiledMapRenderer.getBatch().getTransformMatrix().translate(0, 0, 0);
+                    tiledMapRenderer.render(layers);
+                    tiledMapRenderer.getBatch().setTransformMatrix(original);
+                }
             }
         });
     }
