@@ -1,7 +1,6 @@
 # handdrawn
 
-A little experiment project I've worked for a bit to see how to implement Tiled Parallax Scrolling backgrounds in libgdx.  
-The art is hand-drawn in [Krita](https://krita.org/en/) and [Tiled](https://www.mapeditor.org/) was used for level editing (specifically the image layers and the object layers).
+A little experiment project I've worked for a bit to see how to implement Tiled Parallax Scrolling backgrounds in libgdx. The art is hand-drawn in [Krita](https://krita.org/en/) and [Tiled](https://www.mapeditor.org/) was used for level editing (specifically the image layers and the object layers).
 
 ## Structure
 
