@@ -1,36 +1,51 @@
 # handdrawn
 
-A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
+A little experiment project I've worked for a bit to see how to implement Tiled Parallax Scrolling backgrounds in libgdx.  
+The art is hand-drawn in [Krita](https://krita.org/en/) and [Tiled](https://www.mapeditor.org/) was used for level editing (specifically the image layers and the object layers).
 
-This project was generated with a template including simple application launchers and an `ApplicationAdapter` extension that draws libGDX logo.
+## Structure
 
-## Platforms
+The [Libgdx framework](https://libgdx.com/) for rendering and textures and it already has a Tiled importer built-in.  
+The code structure is as follows:  
 
-- `core`: Main module with the application logic shared by all platforms.
-- `lwjgl3`: Primary desktop platform using LWJGL3; was called 'desktop' in older docs.
-- `html`: Web platform using GWT and WebGL. Supports only Java projects.
+### Core
+- a simple ECS class:
+  - holds a handle of the OrthographicCamera and a handle to the SceneManager;
+  - hashmaps that need to be manually added with every new component you make;
+  - functions that act on the hashmaps (createEntity, addComponent);
+- a StartScene that inherits from Scene class:
+  - start function;
+  - update function;
+  - render function;
+  - every scene holds an ECS class instance, a SceneManager instance and an OrthogonalTiledMapRenderer instance;
+- a simple SceneManager:
+  - manages the scenes in an ArrayList.
 
-## Gradle
+### Components
+- a base Component class:
+  - has a handle for the hashmap key (the entity);
+  - a boolean "enabled";
+- TransformComponent;
+- BoxCollider (Axis-Aligned-Bounding-Boxes -> AABB. Can be solid or just a trigger zone);
+- RigidBody (velocity and gravity;
+- SpriteRenderer;
+- TiledComponent (holds a TiledMap);
+- Player (data for the player character).
 
-This project uses [Gradle](https://gradle.org/) to manage dependencies.
-The Gradle wrapper was included, so you can run Gradle tasks using `gradlew.bat` or `./gradlew` commands.
-Useful Gradle tasks and flags:
+### Systems
+- LoadSystems (handles importing the Object Layers from Tiled based on a "Type" custom property);
+- UpdateSystem (handles physics and AABB collision resolutions);
+- RenderSystems (handles texture drawing, debug drawing and Tiled Parallax Layer rendering);
+- CameraSystems (handles cameraFollow function to follow a position);
+- PlayerSystems (handles the player movement).
 
-- `--continue`: when using this flag, errors will not stop the tasks from running.
-- `--daemon`: thanks to this flag, Gradle daemon will be used to run chosen tasks.
-- `--offline`: when using this flag, cached dependency archives will be used.
-- `--refresh-dependencies`: this flag forces validation of all dependencies. Useful for snapshot versions.
-- `build`: builds sources and archives of every project.
-- `cleanEclipse`: removes Eclipse project data.
-- `cleanIdea`: removes IntelliJ project data.
-- `clean`: removes `build` folders, which store compiled classes and built archives.
-- `eclipse`: generates Eclipse project data.
-- `html:dist`: compiles GWT sources. The compiled application can be found at `html/build/dist`: you can use any HTTP server to deploy it.
-- `html:superDev`: compiles GWT sources and runs the application in SuperDev mode. It will be available at [localhost:8080/html](http://localhost:8080/html). Use only during development.
-- `idea`: generates IntelliJ project data.
-- `lwjgl3:jar`: builds application's runnable jar, which can be found at `lwjgl3/build/libs`.
-- `lwjgl3:run`: starts the application.
-- `test`: runs unit tests (if any).
+## Assets
 
-Note that most tasks that are not specific to a single project can be run with `name:` prefix, where the `name` should be replaced with the ID of a specific project.
-For example, `core:clean` removes `build` folder only from the `core` project.
+The assets were drawn by me with the mouse, on my laptop. They are a simple sketch of a few hills using a simple collor pallete.  
+The "red_pixel.png" assets is made for debug drawing of the colliders (since libgdx doesnt have a rectangle draw function).
+The "tilemaps" and "tilesets" folders were made to better organise the tilemaps and tilesets loaded in Tiled.
+
+The background was exported as individual layers and assembled in Tiled with Image Layers (one image/layer).  
+The parallax value can be set for each Image Layer.
+
+## Result
