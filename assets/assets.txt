@@ -2,8 +2,6 @@ brick.png
 libgdx.png
 red_pixel.png
 sun_man.png
-tilemaps/ldtk_test.ldtk
-tilemaps/template_map.tmx
 tilemaps/test_map.tmx
 tilesets/background.tsx
 tilesets/orange_sun.png

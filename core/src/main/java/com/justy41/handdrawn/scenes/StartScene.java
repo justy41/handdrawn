@@ -34,11 +34,11 @@ public class StartScene extends Scene {
         super.render(batch);
 
         tiledMapRenderer.setView(ecs.camera);
-        RenderSystems.renderTiledMapLayers(ecs, tiledMapRenderer, new int[]{0,1,2,3,4});
+        RenderSystems.renderTiledMapLayers(ecs, tiledMapRenderer, new int[]{0,1,2,3,4,5});
         batch.begin();
         RenderSystems.drawTextures(ecs, batch);
         batch.end();
-        RenderSystems.renderTiledMapLayers(ecs, tiledMapRenderer, new int[]{6,7,8});
+        RenderSystems.renderTiledMapLayers(ecs, tiledMapRenderer, new int[]{7,8,9});
         batch.begin();
         RenderSystems.debugRender(ecs, batch);
         batch.end();

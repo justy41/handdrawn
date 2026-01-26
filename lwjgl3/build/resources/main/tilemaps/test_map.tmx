@@ -6,7 +6,7 @@
  <imagelayer id="23" name="0" offsetx="1920" offsety="0">
   <image source="../tilesets/purple_sun/Background.PNG" width="1920" height="1080"/>
  </imagelayer>
- <imagelayer id="15" name="1">
+ <imagelayer id="15" name="1" parallaxx="0">
   <image source="../tilesets/purple_sun/Paint Layer 7.PNG" width="1920" height="1080"/>
  </imagelayer>
  <imagelayer id="16" name="2" parallaxx="0.4">
@@ -36,7 +36,7 @@
  <imagelayer id="20" name="6" parallaxx="1.5">
   <image source="../tilesets/purple_sun/Paint Layer 2.PNG" width="1920" height="1080"/>
  </imagelayer>
- <imagelayer id="21" name="7" parallaxx="2">
+ <imagelayer id="21" name="7" parallaxx="2" parallaxy="1.5">
   <image source="../tilesets/purple_sun/Paint Layer 3.PNG" width="1920" height="1080"/>
  </imagelayer>
 </map>

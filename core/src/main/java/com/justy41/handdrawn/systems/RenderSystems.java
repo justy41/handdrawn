@@ -44,19 +44,38 @@ public class RenderSystems {
         });
     }
 
+    /**
+     * Used to render Tiled layers separately in order to have a Parallax Effect.
+     * For Parallax use (int Tiled) value 1 for camera speed and 0 for never moving.
+     * Can't have negative values!
+     * @param ecs
+     * @param tiledMapRenderer
+     * @param layers new int[]{...} that contains the indices of the Tiled layers (be aware that every layer counts, even Object Layers)
+     */
     public static void renderTiledMapLayers(Ecs ecs, OrthogonalTiledMapRenderer tiledMapRenderer, int[] layers) {
         Matrix4 original = tiledMapRenderer.getBatch().getTransformMatrix().cpy();
         ecs.tiledComponents.forEach((entity, tiledComponent) -> {
             if(tiledComponent != null) {
-                if(tiledComponent.map.getProperties().get("parallaxx") != null) {
+                if(tiledComponent.map.getProperties().get("parallaxx") != null && tiledComponent.map.getProperties().get("parallaxy") != null) {
+                    tiledMapRenderer.setMap(tiledComponent.map);
+                    tiledMapRenderer.getBatch().getTransformMatrix().translate(tiledComponent.map.getProperties().get("parallaxx", Float.class), tiledComponent.map.getProperties().get("parallaxy", Float.class), 0);
+                    tiledMapRenderer.render(layers);
+                    tiledMapRenderer.getBatch().setTransformMatrix(original);
+                }
+                if(tiledComponent.map.getProperties().get("parallaxx") != null && tiledComponent.map.getProperties().get("parallaxy") == null) {
                     tiledMapRenderer.setMap(tiledComponent.map);
                     tiledMapRenderer.getBatch().getTransformMatrix().translate((float)tiledComponent.map.getProperties().get("parallaxx"), 0, 0);
                     tiledMapRenderer.render(layers);
                     tiledMapRenderer.getBatch().setTransformMatrix(original);
                 }
-                else {
+                if(tiledComponent.map.getProperties().get("parallaxx") == null && tiledComponent.map.getProperties().get("parallaxy") != null) {
                     tiledMapRenderer.setMap(tiledComponent.map);
-                    tiledMapRenderer.getBatch().getTransformMatrix().translate(0, 0, 0);
+                    tiledMapRenderer.getBatch().getTransformMatrix().translate(0, (float)tiledComponent.map.getProperties().get("parallaxy"), 0);
+                    tiledMapRenderer.render(layers);
+                    tiledMapRenderer.getBatch().setTransformMatrix(original);
+                }
+                if(tiledComponent.map.getProperties().get("parallaxx") == null && tiledComponent.map.getProperties().get("parallaxy") == null) {
+                    tiledMapRenderer.setMap(tiledComponent.map);
                     tiledMapRenderer.render(layers);
                     tiledMapRenderer.getBatch().setTransformMatrix(original);
                 }

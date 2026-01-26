@@ -30,6 +30,7 @@ public class LoadSystems {
         }
     }
 
+
     public static void loadTiledObject(Ecs ecs, MapObject obj) {
         if(obj instanceof RectangleMapObject) {
             RectangleMapObject rectObj = (RectangleMapObject)obj;
