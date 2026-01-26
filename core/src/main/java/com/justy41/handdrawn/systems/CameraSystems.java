@@ -23,6 +23,8 @@ public class CameraSystems {
                 ecs.camera.position.x = MathUtils.clamp(ecs.camera.position.x, ecs.camera.viewportWidth/2, mapWidth-ecs.camera.viewportWidth/2);
 
                 ecs.camera.position.y = MathUtils.lerp(ecs.camera.position.y, t.position.y+sr.origin.y, deltaTime*2);
+
+                // Comment the next line to disable camera bounds on y
                 ecs.camera.position.y = MathUtils.clamp(ecs.camera.position.y, ecs.camera.viewportHeight/2, mapHeight-ecs.camera.viewportHeight/2);
             }
         });

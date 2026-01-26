@@ -1,4 +1,5 @@
 brick.png
+gifs/handdrawn3.gif
 libgdx.png
 red_pixel.png
 sun_man.png

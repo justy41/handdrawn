@@ -15,6 +15,8 @@ public class Ecs {
     public OrthographicCamera camera;
     private Set<Integer> freeIDs;
     private Set<Integer> entitiesToDestroy;
+
+    // COMPONENT HASHMAPS
     public HashMap<Integer, TransformComponent> transforms;
     public HashMap<Integer, RigidBody> rigidbodies;
     public HashMap<Integer, SpriteRenderer> spriteRenderers;
@@ -32,9 +34,14 @@ public class Ecs {
         boxColliders = new HashMap<>();
         players = new HashMap<>();
         tiledComponents = new HashMap<>();
-        // ...
+        // Add here...
     }
 
+    // Creates a new entity ID and allocates a new spot for it in every component hashmap.
+    // The Ecs is using a list of unused IDs when creating a new entity.
+    // If we have a free ID, we use it. If we don't, we move on with the nextEntity counter.
+    // Free IDs come from deleted entities.
+    // It's like recycling :) .
     public int createEntity() {
         int id;
         if(freeIDs.isEmpty()) {
@@ -52,7 +59,7 @@ public class Ecs {
         boxColliders.put(id, null);
         players.put(id, null);
         tiledComponents.put(id, null);
-        // ...
+        // Add here...
         return id;
     }
 
@@ -60,16 +67,19 @@ public class Ecs {
         entitiesToDestroy.add(entity);
     }
 
+    // Adds component to a specified hashmap (ecs.name_of_the_hashmap).
     public <T extends Component> void addComponent(int entity, HashMap<Integer, T> componentMap, T component) {
         component.key = entity;
         component.enabled = true;
         componentMap.put(entity, component);
     }
 
+    // Remove a component from a specified hashmap.
     public <T extends Component> void removeComponent(HashMap<Integer, T> componentMap, T component) {
         componentMap.remove(component.key);
     }
 
+    // Called at the end of every frame to not interfere with iterating.
     public void processDeletions() {
         for(int entity : entitiesToDestroy) {
             transforms.remove(entity);
@@ -83,9 +93,5 @@ public class Ecs {
         }
 
         entitiesToDestroy.clear();
-    }
-
-    public void clear() {
-
     }
 }
